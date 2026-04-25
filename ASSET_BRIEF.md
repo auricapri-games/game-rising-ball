@@ -5,9 +5,10 @@
 
 ## Sprites required
 
-- ball.png 36x36 ball
+- ball.png 36x36 ball with bounce squash
 - platform.png 100x16 grass platform
-- spike.png 100x40 spikes
+- spike.png 100x40 deadly spikes
+- cloud_bg.png 200x100 background cloud parallax
 
 ## How to generate
 
