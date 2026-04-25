@@ -38,8 +38,8 @@ class RisingBallParams extends LevelParams {
   static const double kBaseBallRadius = 18;
   static const double kBasePlatformVerticalGap = 110;
   static const double kBasePlatformJitter = 22;
-  static const int kBaseNumPlatforms = 18;
-  static const int kBasePhaseTarget = 600;
+  static const int kBaseNumPlatforms = 400;
+  static const int kBasePhaseTarget = 999999999;
   static const int kBaseScorePerUnit = 1;
   static const int kBaseSpikeChance = 8;
   static const int kSpikeRollMax = 100;

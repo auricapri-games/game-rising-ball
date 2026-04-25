@@ -42,6 +42,7 @@ class _GameplayScreenState extends State<GameplayScreen>
   Duration _lastTick = Duration.zero;
   int _horizontal = 0;
   final ValueNotifier<bool> _paused = ValueNotifier<bool>(false);
+  final ValueNotifier<bool> _showTutorial = ValueNotifier<bool>(true);
   bool _navigated = false;
 
   ui.Image? _ballImage;
@@ -129,10 +130,12 @@ class _GameplayScreenState extends State<GameplayScreen>
 
   void _onLeftDown(_) {
     _horizontal = -1;
+    if (_showTutorial.value) _showTutorial.value = false;
   }
 
   void _onRightDown(_) {
     _horizontal = 1;
+    if (_showTutorial.value) _showTutorial.value = false;
   }
 
   void _onRelease(_) {
@@ -148,6 +151,7 @@ class _GameplayScreenState extends State<GameplayScreen>
     _ticker.dispose();
     _state.dispose();
     _paused.dispose();
+    _showTutorial.dispose();
     super.dispose();
   }
 
@@ -258,9 +262,19 @@ class _GameplayScreenState extends State<GameplayScreen>
             Positioned(
               bottom: _kHudPadding,
               left: _kHudPadding,
-              child: ScoreChip(
-                label: loc.controlsHint,
-                value: loc.tapToStart,
+              child: ValueListenableBuilder<bool>(
+                valueListenable: _showTutorial,
+                builder: (context, show, _) => AnimatedOpacity(
+                  duration: const Duration(milliseconds: 300),
+                  opacity: show ? 1.0 : 0.0,
+                  child: IgnorePointer(
+                    ignoring: !show,
+                    child: ScoreChip(
+                      label: loc.controlsHint,
+                      value: loc.tapToStart,
+                    ),
+                  ),
+                ),
               ),
             ),
           ],
